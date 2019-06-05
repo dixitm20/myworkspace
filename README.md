@@ -31,12 +31,7 @@ The Repository contains the completed "Big Data Technical Assignment"
 	command : "conda create --name myenv --file spec-file.txt" to create a identical python environment.
 
 ----------------------------------------------------
-# Below are high level design details of the process. 
-# The python notebook contains detailed information
-# about each step of the process. In case jupyter notebook
-# env is not available I will suggest to go thorough the html 
-# version of the notebook in path: 
-#        /assignment/code/process_crimedata_and_load_to_es.html
+# Below are high level design details of the process. The python notebook contains detailed information about each step of the process. In case jupyter notebook env is not available I will suggest to go thorough the html version of the notebook in path: /assignment/code/process_crimedata_and_load_to_es.html
 ----------------------------------------------------
 
 1) The source dir : "./assignment/problem-statement-artifacts/data" is considered to be the source data dir 
@@ -65,5 +60,11 @@ The Repository contains the completed "Big Data Technical Assignment"
 4) We then perform left outer join of both the dataframes of street and outcome and calculate the lastOutcome column value based 
 	on the logic mentioned in the assignment document.
 
-5) The final dataframe created in step 4 is then used to upload the data to the elastic search. We also store a copy of this final
-	dataset into outdir: /assignment/data/outdir into a csv file.
+5) The final dataframe created in step 4 is then used to upload the data to the elastic search to an index named: crimedetails. 
+	We also store a copy of this final dataset into outdir: /assignment/data/outdir/out-dataset-for-elasticSearch-upload.csv 
+	into a csv file.
+
+6) The process is completely restartable. You can run the code multiple times from start to finish without needing to do any cleanup.
+	The only side effect of the multiple runs is that the process will try to load the data into the same index in elastic search 
+	multiple times and this can take quite a bit of time.
+
